@@ -17,6 +17,9 @@ namespace Aula_15052023
             InitializeComponent();
         }
 
+        /**
+         * Valida se média informada se é um numero ou esta vazia  
+         * */
         private bool Validate_TxtMedia(string txt_valor)
         {
             string txt_message = "Informe um valor numérico!";
@@ -31,6 +34,9 @@ namespace Aula_15052023
             return true;
         }
 
+        /**
+         * Valida a suatuação do aluno  
+         * */
         private string Validate_situation(float average)
         {
             float overallAverage = (float)Convert.ToDecimal( this.Txt_MediaGeral.Text.Replace('.',','));
@@ -43,6 +49,9 @@ namespace Aula_15052023
             return "Reprovado"; 
         }
 
+        /**
+         * Chama Validate_TxtMedia caso recebe falso limpa o  Txt_MediaGeral e posiciona o cursor no campo
+         * */
         private void Txt_MediaGeral_Leave(object sender, EventArgs e)
         {
             if (!Validate_TxtMedia(this.Txt_MediaGeral.Text)) 
@@ -51,7 +60,11 @@ namespace Aula_15052023
                 this.Txt_MediaGeral.Focus();
             }
         }
-               
+
+
+        /**
+         * Chama Validate_TxtMedia caso recebe falso limpa o Txt_NotaFinal e posiciona o cursor no campo
+         * */
         private void Txt_NotaFinal_TextChanged(object sender, EventArgs e)
         {
             if (!Validate_TxtMedia(this.Txt_NotaFinal.Text))
@@ -61,6 +74,9 @@ namespace Aula_15052023
             }
         }
 
+        /**
+         * Inclui aluno no Grd_Alunos, chama Validate_situation passando Txt_NotaFinal
+         */
         private void Btn_IncluirAluno_Click(object sender, EventArgs e)
         {
             this.Grd_Alunos.Rows.Insert(0, 
@@ -73,12 +89,18 @@ namespace Aula_15052023
                                         ));
         }
 
+        /**
+        * Calcula a idade do aluno
+        */
         private void Dtp_DataNascimento_Leave(object sender, EventArgs e)
         {
             int idade = new DateTime((DateTime.Now - Dtp_DataNascimento.Value).Ticks).Year;
             this.Txt_Idade.Text = idade.ToString();
         }
 
+        /**
+        * Reavalia a situação do aluno chamando em cada linha do Grd_Alunos o Validate_situation passando a coluna Nota
+        */
         private void Btn_ReavaliarAlunos_Click(object sender, EventArgs e)
         {
             if (this.Grd_Alunos.Rows.Count > 0)
@@ -95,6 +117,9 @@ namespace Aula_15052023
             }
         }
 
+        /**
+        * Valida se o nome do aluno esta preenchido
+        */
         private void Txt_NomeAluno_Leave(object sender, EventArgs e)
         {
             if(String.IsNullOrWhiteSpace(this.Txt_NomeAluno.Text))
